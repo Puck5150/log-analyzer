@@ -24,14 +24,14 @@ class TestDetect(unittest.TestCase):
             with self.subTest(word=word):
                 line = f"the {word} caused exit"
                 result = detect(line)
-                self.assertEqual(result, line)
+                self.assertEqual(result, (line, "severity", word))
                 
     def test_detect_pattern_phrase(self):
         for phrase in PATTERNS:
             with self.subTest(phrase=phrase):
                 line = f"the {phrase} caused exit"
                 result = detect(line)
-                self.assertEqual(result, line)
+                self.assertEqual(result, (line, "pattern", phrase))
             
     def test_detect_no_match(self):
         line = "nothing to see here"
@@ -43,4 +43,4 @@ class TestDetect(unittest.TestCase):
             with self.subTest(word=word):
                 line = f"an {word.upper()} occurred"
                 result = detect(line)
-                self.assertEqual(result, line)
+                self.assertEqual(result, (line, "severity", word))
