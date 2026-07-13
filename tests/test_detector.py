@@ -27,11 +27,11 @@ class TestDetect(unittest.TestCase):
                 self.assertEqual(result, (line, "severity", word))
                 
     def test_detect_pattern_phrase(self):
-        for phrase in PATTERNS:
+        for phrase, category in PATTERNS.items():
             with self.subTest(phrase=phrase):
                 line = f"the {phrase} caused exit"
                 result = detect(line)
-                self.assertEqual(result, (line, "pattern", phrase))
+                self.assertEqual(result, (line, category, phrase))
             
     def test_detect_no_match(self):
         line = "nothing to see here"
