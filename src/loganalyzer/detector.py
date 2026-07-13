@@ -8,6 +8,7 @@ PATTERNS = {
 
 SEVERITIES = ["warning", "error", "critical", "fatal"]
 
+
 def detect(line):
     line_lower = line.lower()
     #check severity words
@@ -19,3 +20,11 @@ def detect(line):
         if phrase in line_lower:
             return line
     return None
+
+def count_matches(filepath):
+    count = 0
+    with open(filepath) as f:
+        for line in f:
+            if detect(line) is not None:
+                count += 1
+        return count
