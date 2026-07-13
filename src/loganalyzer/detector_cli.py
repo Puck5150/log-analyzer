@@ -16,7 +16,13 @@ try:
 except FileNotFoundError:
     print(f"File not found: {args.filepath}")
     sys.exit(1)
+counts = {}
+for match in matches:
+    category = match[1]
+    counts[category] = counts.get(category, 0) +1
 
 print(f"Total matches: {len(matches)}")
 for m in matches:
     print(m)
+
+print(f"By category: {counts}")
