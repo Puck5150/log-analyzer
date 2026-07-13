@@ -15,7 +15,7 @@ class TestCountMatches(unittest.TestCase):
             tmp.write(content)
             path = tmp.name
         result = count_matches(path)
-        self.assertEqual(result, 3)
+        self.assertEqual(result, {"severity": 3})
         os.remove(path)
         
 class TestDetect(unittest.TestCase):

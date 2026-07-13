@@ -23,10 +23,11 @@ def detect(line):
     return None
 
 def count_matches(filepath):
-    count = 0
+    counts = {}
     with open(filepath) as f:
         for line in f:
             result = detect(line)
             if result is not None:
-                count += 1
-    return count
+                category = result[1]
+                counts[category] = counts.get(category, 0) +1
+    return counts
