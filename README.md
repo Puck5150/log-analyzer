@@ -7,6 +7,7 @@ This tool eliminates the drudgery of reading through logging manually. It will l
 Patterns for:
 - "failed password" (auth)
 - "authentication failure" (auth)
+- "no space left on device" (system)
 - "i/o error" (system)
 - "out of memory" (system)
 - "connection refused" (network)
@@ -39,16 +40,16 @@ No additional modules need to be installed — the project only relies on Python
 
 ## Usage
 
-Run the CLI directly against any log file, pointing at the script itself:
+Run the CLI as a module from the repository root, pointing at any log file:
 
 ```bash
-python3 src/loganalyzer/detector_cli.py <path-to-log-file>
+python3 -m src.loganalyzer.detector_cli <path-to-log-file>
 ```
 
 ### Example
 
 ```bash
-python3 src/loganalyzer/detector_cli.py sample_logs/test.log
+python3 -m src.loganalyzer.detector_cli sample_logs/test.log
 ```
 
 This prints the total number of matching lines, followed by each matching line itself. If the file doesn't exist, it prints a clear error message and exits with a nonzero status instead of crashing.

@@ -1,4 +1,4 @@
-from detector import detect
+from .detector import detect
 import argparse
 import sys
 
