@@ -18,7 +18,7 @@ And severity levels:
 - "critical"
 - "fatal"
 
-A line is flagged if it contains any of the above, checked case-insensitively.
+A line is flagged if it contains any of the above, checked case-insensitively. Patterns are checked before severity words, so a line like "i/o error" is categorized as system rather than matching on the substring "error". Each match reports its category (auth, system, network, or severity) alongside the matched text.
 
 ## Requirements
 
@@ -52,12 +52,13 @@ python3 -m src.loganalyzer.detector_cli <path-to-log-file>
 python3 -m src.loganalyzer.detector_cli sample_logs/test.log
 ```
 
-This prints the total number of matching lines, followed by each matching line itself. If the file doesn't exist, it prints a clear error message and exits with a nonzero status instead of crashing.
+This prints the total number of matching lines, a breakdown of matches by category, and then each matching line itself. If the file doesn't exist, it prints a clear error message and exits with a nonzero status instead of crashing.
 
 ## Running tests
 
 ```bash
 python3 -m unittest tests.test_detector -v
+python3 -m unittest tests.test_detector_cli -v
 ```
 
 ## Project structure
@@ -68,6 +69,7 @@ src/loganalyzer/
     detector_cli.py   - command-line entry point
 tests/
     test_detector.py  - unittest coverage for detector.py
+    test_detector_cli.py - unittest coverage for detector_cli.py
 sample_logs/
     test.log          - example log data for manual testing
 ```
